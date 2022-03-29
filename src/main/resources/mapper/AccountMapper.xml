@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.AccountRepository">
+
+    <select id="getAccount"
+            parameterType="com.example.demo.AccountDto$loginAccount"
+            resultType="com.example.demo.AccountDto$ResAccount">
+        SELECT email, firstName, lastName, password, address1, address2
+        FROM account
+        WHERE email = #{email}
+    </select>
+    <insert id="createAccount"
+            parameterType="com.example.demo.AccountDto$SignUpReq"
+            >
+        INSERT INTO demo.account
+        (email, firstName, lastName, password, address1, address2)
+        VALUES(
+        #{email}, #{firstName}, #{lastName}, #{password}, #{address1}, #{address2});
+    </insert>
+    <select id="getAccountList"
+            resultMap="accountResult">
+        SELECT *
+        FROM account
+    </select>
+    <resultMap id="accountResult" type="com.example.demo.Account">
+
+    </resultMap>
+
+</mapper>
